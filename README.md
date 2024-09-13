@@ -1,9 +1,4 @@
-## Hi there 👋
-
-<!--
-**andreevaiva/andreevaiva** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
+## Hi there 👋. My name is Iva.
 
 - 🔭 I’m currently working on a personal page of myself
 - 🌱 I’m currently learning Java
@@ -12,3 +7,6 @@ Here are some ideas to get you started:
 - 📫 How to reach me: i.andreeva26@acsbg.org
 - 😄 Pronouns: she/her
 -->
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=andreevaiva&show_icons=true)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=andreevaiva&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
