@@ -7,14 +7,14 @@ public class Main {
                 new Book("Emma", "Jane Austen", 1816),
                 new Book("Matilda", "Roald Dahl", 1988)};
 
-        System.out.print("Welcome to Iva's Library!\n\nMenu:\n1. Display all books\n2. Update information about a book\n3. Borrow a book\n4. Return a book\n5. Exit\n");
+        System.out.print("Welcome to Iva's Library!\n");
 
         int input = 0;
         int index=-1;
 
         do{
-            System.out.print("\nEnter code: ");
 
+            System.out.print("Menu:\n1. Display all books\n2. Update information about a book\n3. Borrow a book\n4. Return a book\n5. Exit\nEnter code: ");
             input = scanner.nextInt();
 
             switch(input){
@@ -22,25 +22,33 @@ public class Main {
                     displayLibrary(books);
                     break;
                 case 2:
-                    System.out.print("Enter code of the book you want to update: ");
-                    index= scanner.nextInt();
-                    System.out.print("Enter new title: ");
-                    String newTitle = "";
-                    while(newTitle.equals("")) {
-                        newTitle = scanner.nextLine();
+                    System.out.print("Enter name of the book you want to update: ");
+                    String nameOfBook="";
+                    while(nameOfBook.equals("")) {
+                        nameOfBook = scanner.nextLine();
                     }
+                    index=findBookByTitle(books, nameOfBook);
+                    if(index==-1) {
+                        System.out.println("Book not found!");
+                    }else {
+                        System.out.print("Enter new title: ");
+                        String newTitle = "";
+                        while(newTitle.equals("")) {
+                            newTitle = scanner.nextLine();
+                        }
 
-                    System.out.print("Enter new author: ");
-                    String newAuthor = "";
-                    while(newAuthor.equals("")) {
-                        newAuthor = scanner.nextLine();
+                        System.out.print("Enter new author: ");
+                        String newAuthor = "";
+                        while(newAuthor.equals("")) {
+                            newAuthor = scanner.nextLine();
+                        }
+
+                        System.out.print("Enter new year: ");
+                        int newYear = scanner.nextInt();
+
+                        books[index].updateBookInfo(newTitle, newAuthor, newYear);
+                        System.out.println("Book updated successfully!");
                     }
-
-                    System.out.print("Enter new year: ");
-                    int newYear = scanner.nextInt();
-
-                    books[index].updateBookInfo(newTitle, newAuthor, newYear);
-                    System.out.println("Book updated successfully!");
                     break;
                 case 3:
                     System.out.print("Enter name of the book you want to borrow: ");
@@ -52,7 +60,7 @@ public class Main {
                     if(index==-1) {
                         System.out.println("Book not found!");
                     }else {
-                        if(books[index].getBorrowerName().equals(null)) {
+                        if(books[index].getBorrowerName().equals("")) {
                             System.out.print("Enter your name: ");
                             String name = "";
                             while (name.equals("")) {
@@ -76,8 +84,12 @@ public class Main {
                     if(index==-1){
                         System.out.print("Book not found!\n");
                     }else {
-                        books[index].returnBook();
-                        System.out.println("Book returned successfully!");
+                        if(books[index].getBorrowerName().equals("")) {
+                            System.out.print("This book is not currently borrowed!\n");
+                        }else {
+                            books[index].returnBook();
+                            System.out.println("Book returned successfully!");
+                        }
                     }
                     break;
                 case 5:
@@ -86,13 +98,14 @@ public class Main {
                     System.out.println("Invalid choice. Try again.");
 
             }
+            System.out.print("\n----------------------------\n");
 
         }while(input != 5);
 
     }
     static void displayLibrary(Book[] books){
         for(int i = 0; i < books.length; i++){
-            System.out.println((i+1)+". "+books[i].getDetails());
+            System.out.print((i+1)+". "+books[i].getDetails());
         }
     }
 
@@ -116,11 +129,11 @@ class Book{
         this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.borrowerName = null;
+        this.borrowerName = "";
     }
 
     public String getDetails(){
-        if(borrowerName == null) {
+        if(borrowerName == "") {
             return title + " by " + author + ", published in " + yearPublished + ".\n";
         }else{
             return title + " by " + author + ", published in " + yearPublished + ". This book is currently borrowed by " + borrowerName + "\n";
@@ -138,13 +151,13 @@ class Book{
     }
 
     public void returnBook(){
-        this.borrowerName=null;
+        this.borrowerName="";
     }
 
     public String getTitle(){
         return title;
     }
-    
+
     public String getBorrowerName(){
         return borrowerName;
     }
