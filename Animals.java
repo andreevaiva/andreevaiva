@@ -1,5 +1,5 @@
 import java.util.*;
-public class Main {
+public class Animals {
     public static void main(String[] args) {
         Duck duck = new Duck(1, "female", "yellow");
         duck.quack();
