@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.Math;
 import java.util.Arrays;
 
-public class Main {
+public class WordsCode {
     public static void main(String[] args) {
         Words words=new Words();
         System.out.println(words.findDistance());
